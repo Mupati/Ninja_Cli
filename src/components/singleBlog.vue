@@ -1,7 +1,15 @@
 <template>
-	<div id="single-blog">
-		<h3>{{ blog.title | capitalize }}</h3>
-		<article>{{ blog.body }}</article>
+	<div class="p-5 mx-5 text-center" id="single-blog">
+		<h3 class="pb-3">{{ post.heading}}</h3>
+		<p>	
+			<span>Author: {{post.author}}</span>
+			<span>Date Published: {{post.postdate}}</span>
+		 </p>
+		<article>{{ post.para1 }}</article>
+		<article>{{ post.para2 }}</article>
+		<article>{{ post.para3 }}</article>
+		<article>{{ post.para4 }}</article>
+		<article>{{ post.para5 }}</article>
 	</div>
 </template>
 
@@ -12,17 +20,18 @@ export default{
 	data(){
 		return{
 			id: this.$route.params.id,
-			blog:{}
+			post:[]
 		}
 	},
 
 	created(){
-		this.$http.get('http://jsonplaceholder.typicode.com/posts/'+ this.id).then(function(){
-			this.blog = data.body;
+		var that = this;
+		var details = { "service":"KHM", "table":"blog", params : { where:["id,"+this.id]} 
+				}
+		SDK.queryData(details.service, details.table, details.params, function(data){
+			that.post = data.payload.results[0]; 
 		});
 	}
-
-
 
 }
 

@@ -46,8 +46,11 @@ Vue.directive('theme',{
 	bind(el, binding, vnode){
 		if(binding.value == 'wide'){
 			el.style.maxWidth = '1200px';
+			el.style.margin = '0 auto';
 		}else if (binding.value == 'narrow'){
 			el.style.maxWidth = '560px';
+			el.style.margin = '0 auto';
+
 		}
 
 		if(binding.arg == 'column'){

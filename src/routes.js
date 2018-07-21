@@ -6,6 +6,6 @@ export default [
 
 	{path: '/', component: showBlogs },
 	{path: '/add', component: addBlog},
-	{path: '/blog/:id', component: singleBlog}
+	{path: '/post/:id', component: singleBlog}
 
 ]
