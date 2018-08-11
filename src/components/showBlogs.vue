@@ -1,7 +1,7 @@
 <template>
 	<div v-theme:column="'wide'" id="show-blogs"  class="text-center p-3 m-3">  <!-- v-theme:column="'wide'"  -->
 		<h2>All Blog Articles</h2>
-		<input type="text" v-model="search" placeholder="search box">
+		<input type="text" v-model="search" placeholder="search box"><br>
 		<div v-for="post in filteredPosts" class="mb-3 p-3" id="single-blog">
 			<router-link v-bind:to="'/post/'+ post.id"><h3>{{post.heading | capitalize}}</h3></router-link>
 			<article>{{post.para1}}</article>
@@ -27,7 +27,7 @@ export default{
 
 	computed:{
 		filteredPosts:function() {
-			return this.posts.filter((post)=>{
+			return this.posts.slice(0,5).filter((post)=>{
 				return post.heading.match(this.search) || post.para1.match(this.search) ;
 			});
 		}
@@ -71,6 +71,9 @@ body{
 
 #single-blog{
 	background: #eee;
+}
+#single-blog a h3{
+	text-decoration: none;
 }
 
 

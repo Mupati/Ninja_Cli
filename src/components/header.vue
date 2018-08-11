@@ -2,7 +2,10 @@
 	<nav>
 		<ul>
 			<li><router-link to="/">Blog</router-link></li>
-			<li><router-link to="/add">Add Blog</router-link></li>
+			<li><router-link to="/add">Add Blog</router-link>
+			<li><router-link to="/login">Login</router-link>
+			<li><router-link to="/register">Register</router-link>
+			</li>
 		</ul>
 	</nav>
 </template>

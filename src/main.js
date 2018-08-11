@@ -2,22 +2,32 @@ import Vue from 'vue'
 /*import App from './App.vue'
 import Web from './Web.vue'*/
 /*import Slot from './Slot.vue'*/
-import Blog from './Blog.vue'
+
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueSwal from 'vue-swal'
+
 import Routes from './routes.js'
+import Blog from './Blog.vue'
 /*import Devless from 'devless-sdk'*/
 /*Vue.component('punch',Punchlines);*/
 /*export const bus = new Vue();*/
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VueSwal);
 /*Vue.use(Devless);*/
 
 const router = new VueRouter({
 	routes: Routes,
 	mode: 'history'
 });
+
+router.beforeEach((to, from, next) => {
+	document.title = to.meta.title
+	next()
+})
+
 
 /*<script src="http://localhost:4545/js/devless-sdk.js" class="devless-connection" devless-con-token="00c41647176ef85da6f9d75d88a6f343"  ></script>
 *//*var constants = {

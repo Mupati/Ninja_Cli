@@ -1,4 +1,27 @@
 <template>
+<div class="bigDiv">
+<div class="profile">
+	<div class="container">
+		<div class="row">
+			<div class="col-4 offset-4">
+	<h3>Get Profile Information</h3>
+	<button class="btn btn-success text-center" v-on:click="showprofile = !showprofile">Toggle View Profile</button>
+	<br><br>
+	<div v-if="showprofile">
+		<ul class="list-group text-center" v-for="details in prof_desc">
+			  <li class="list-group-item active"><h5>{{details.related._devless_users[0].first_name}} {{details.related._devless_users[0].last_name}}</h5></li>
+			  <li class="list-group-item">Profession: {{ details.profession }}</li>
+			  <li class="list-group-item">Location: {{details.location }}</li>
+			  <li class="list-group-item">Hospital: {{ details.hospital }}</li>
+			  <li class="list-group-item">Email: {{ details.related._devless_users[0].email }}</li>
+			  <br><br>
+		</ul>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+<hr>
 <div  class="pt-5" id="add-blog">
 		<h2 class="text-muted">Add a New Blog Post</h2>
 
@@ -61,22 +84,38 @@
 
 		</div>
 	</div>
+
+</div>
 </template>
 
 <script>
 
 export default{
 
+	created(){
+			var that = this
+			var params = {
+				 related: "*"
+			}
+			SDK.queryData("Ninja", "details",params, function(res){
+  					console.log(res);
+  					that.prof_desc = res.payload.results;
+  					that.showprofile = true;
+		});
+	},
+
 	data(){
 		return{
-			
 			blog:{
 				heading:'',
 				author: '',
 				contents: [],
 				categories:[],
-				submitted: false
-			}
+				submitted: false,	
+			},
+
+			showprofile: false,
+			prof_desc :{},
 		}
 	},
 
@@ -103,6 +142,18 @@ export default{
 			SDK.addData(details.service, details.table, data, function(response){
 					that.blog.submitted = true;
 			});
+		},
+
+		showProfile: function(){
+			var that = this
+			var params = {
+				 related: "*"
+			}
+			SDK.queryData("Ninja", "details",params, function(res){
+  					console.log(res);
+  					that.prof_desc = res.payload.results;
+  					that.showprofile = true;
+});
 		}
 
 	},
